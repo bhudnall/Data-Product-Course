@@ -1,6 +1,3 @@
-require(ggplot2)
-require(GGally)
-
 options(shiny.maxRequestSize = 9*1024^2)
 
 shinyServer(function(input, output) {

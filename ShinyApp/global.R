@@ -1,1 +1,1 @@
-data <- reactivateValues()
+data <- reactiveValues()
