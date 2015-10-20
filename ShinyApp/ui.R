@@ -18,6 +18,13 @@ shinyUI(fluidPage(
                                Semicolon=';',
                                Tab='\t'),
                              ','),
-                tags$hr()
+                radioButtons('quote', 'Quote',
+                             c(None='',
+                               'Double Quote'='"',
+                               'Single Quote'="'"),
+                             'Double Quote')
+        ),
+        mainPanel(
+            tableOutput('contents')
         )
 ))
