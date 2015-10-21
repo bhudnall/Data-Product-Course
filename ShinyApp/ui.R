@@ -1,7 +1,7 @@
 shinyUI(fluidPage(
         titlePanel("Upload File for Analysis"),
         sidebarPanel(
-                fileInput('file1', 'Choose file to upload',
+                fileInput('file', 'Choose file to upload',
                           accept = c(
                                   'text/csv',
                                   'text/comma-seperated-values',

@@ -1,19 +1,22 @@
+library(shiny)
+
 options(shiny.maxRequestSize = 9*1024^2)
 
 shinyServer(function(input, output) {
-#         output$contents <- renderTable({
-#                 inFile <- input$file1
-#                 if(is.null(inFile))
-#                         return(NULL)
-#                 file <- read.csv(inFile$datapath, header = input$header,
-#                          sep = input$sep, quote = input$quote)
-#         })
-    output$contents <- renderText({
-        if(is.null(input$file1))
-            return()
-        inFile <- input$file1
-        data2 <- read.csv(inFile$datapath)
-        assign('data', data2, envir = .GlobalEnv)
-        print(summary(data))
+        
+    dataInput <- reactive({
+            if(is.null(input$file))
+              return()
+            inFile <- input$file
+            data2 <- read.csv(inFile$datapath)
+            assign('regress_data', data2, envir = .GlobalEnv)
+        
+    })
+    runRegression <- reactive({
+            
+    })
+    output$contents <- renderTable({
+            myDF <- dataInput()
+            print(myDF)
     })
 })
