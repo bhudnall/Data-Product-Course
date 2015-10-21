@@ -24,8 +24,9 @@ shinyUI(fluidPage(
                                'Single Quote'="'"),
                              'Double Quote'),
                 
+                uiOutput("choose_depVars"),
                 uiOutput("choose_indVars"),
-                uiOutput("choose_depVars")
+                uiOutput("choose_factorVars")
         ),
         mainPanel(
             tabsetPanel(

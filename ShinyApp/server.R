@@ -1,5 +1,4 @@
 # Things that need to be done:
-#     - a way to convert independent variables to factor variables with text entry
 #     - develop formula
 
 
@@ -17,21 +16,31 @@ shinyServer(function(input, output) {
             assign('regress_data', data2, envir = .GlobalEnv)
         
     })
-    output$choose_indVars <- renderUI({
-            
+    getFields <- reactive({
             if(is.null(input$file)) return() 
             fields <- names(dataInput())
+    })
+    output$choose_indVars <- renderUI({
+            
+            indFields <- getFields()
             checkboxGroupInput("indVars", "Choose Independent Variables",
-                               choices = fields)
+                               choices = setdiff(indFields, input$depVars), inline = TRUE)
     })
     output$choose_depVars <- renderUI({
         
-            if(is.null(input$file)) return() 
-            fields <- names(dataInput())
-            checkboxGroupInput("depVars", "Choose Dependent Variable",
-                                choices = fields)
+            depFields <- getFields()
+            checkboxGroupInput("depVars", "Choose One Dependent Variable",
+                                choices = depFields, inline = TRUE)
+    })
+    output$choose_factorVars <- renderUI({
+            
+            checkboxGroupInput("factorVars", "Which Independent variables are factor variables?",
+                               choices = input$indVars, inline = TRUE)
     })
     runRegression <- reactive({
+            
+            ## Add button that shows run Regression
+            ## convert variables to factor after button click
             
     })
     output$contents <- renderTable({
