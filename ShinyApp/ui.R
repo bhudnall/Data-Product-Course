@@ -22,9 +22,16 @@ shinyUI(fluidPage(
                              c(None='',
                                'Double Quote'='"',
                                'Single Quote'="'"),
-                             'Double Quote')
+                             'Double Quote'),
+                
+                uiOutput("choose_indVars"),
+                uiOutput("choose_depVars")
         ),
         mainPanel(
-            tableOutput('contents')
+            tabsetPanel(
+                tabPanel("Data Table", tableOutput('contents')),
+                tabPanel("Regression Results"),
+                tabPanel("Plot")
+            )
         )
 ))
