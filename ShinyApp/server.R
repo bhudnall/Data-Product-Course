@@ -1,3 +1,8 @@
+# Things that need to be done:
+#     - a way to convert independent variables to factor variables with text entry
+#     - develop formula
+
+
 library(shiny)
 
 options(shiny.maxRequestSize = 9*1024^2)
