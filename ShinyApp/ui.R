@@ -1,3 +1,5 @@
+library(shiny)
+
 shinyUI(fluidPage(
         titlePanel("Upload File for Analysis"),
         sidebarPanel(

@@ -50,9 +50,8 @@ shinyServer(function(input, output) {
             print(head(df))
             
     })
-    runLinearRegression <- eventReactive(input$runLinearButton, {
-        
-            ## convert variables to factor after button click
+    getDataForRegression <- reactive({
+            
             datas <- dataInput()
             factors <- input$factorVars
             for (i in names(datas)) {
@@ -60,6 +59,13 @@ shinyServer(function(input, output) {
                             datas[,i] <- as.factor(datas[,i])
                     } 
             }
+            return(datas)
+            
+    })
+    runLinearRegression <- eventReactive(input$runLinearButton, {
+        
+            ## convert variables to factor after button click
+            datas <- getDataForRegression()
             lm_multi <- lm(print(as.formula(
                     paste(input$depVars," ~ ", 
                           paste(input$indVars, collapse="+")))), 
@@ -77,8 +83,7 @@ shinyServer(function(input, output) {
     })
     runLogisticRegression <- eventReactive(input$runLogisticButton, {
             
-            ## convert variables to factor after button click
-            datas <- dataInput()
+            datas <- getDataForRegression()
             lm_multi <- glm(print(as.formula(
                     paste(input$depVars," ~ ", 
                           paste(input$indVars, collapse="+")))), 
