@@ -37,12 +37,6 @@ shinyServer(function(input, output) {
             checkboxGroupInput("factorVars", "Which Independent variables are factor variables?",
                                choices = input$indVars, inline = TRUE)
     })
-    runRegression <- reactive({
-            
-            ## Add button that shows run Regression
-            ## convert variables to factor after button click
-            
-    })
     output$contents <- renderTable({
             
             if(is.null(input$file)) return()
@@ -54,5 +48,11 @@ shinyServer(function(input, output) {
             df <- df[,final_cols, drop = FALSE]
             print(head(df))
             
+    })
+    runRegression <- eventReactive(input$runButton, {
+        
+        ## convert variables to factor after button click
+        
+        
     })
 })

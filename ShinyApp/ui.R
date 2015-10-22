@@ -26,7 +26,8 @@ shinyUI(fluidPage(
                 
                 uiOutput("choose_depVars"),
                 uiOutput("choose_indVars"),
-                uiOutput("choose_factorVars")
+                uiOutput("choose_factorVars"),
+                actionButton("runButton", "Run Regression")
         ),
         mainPanel(
             tabsetPanel(
