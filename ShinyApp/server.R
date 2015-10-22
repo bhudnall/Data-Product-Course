@@ -3,6 +3,7 @@
 
 
 library(shiny)
+library(leaps)
 
 options(shiny.maxRequestSize = 9*1024^2)
 
@@ -49,10 +50,49 @@ shinyServer(function(input, output) {
             print(head(df))
             
     })
-    runRegression <- eventReactive(input$runButton, {
+    runLinearRegression <- eventReactive(input$runLinearButton, {
         
-        ## convert variables to factor after button click
-        
-        
+            ## convert variables to factor after button click
+            datas <- dataInput()
+            factors <- input$factorVars
+            for (i in names(datas)) {
+                    if (i %in% factors) {
+                            datas[,i] <- as.factor(datas[,i])
+                    } 
+            }
+            lm_multi <- lm(print(as.formula(
+                    paste(input$depVars," ~ ", 
+                          paste(input$indVars, collapse="+")))), 
+                    data=datas)
+            step(lm_multi, direction="both")
+            
+    })
+    output$linearRegressionTab <- renderTable({
+            
+            if(!is.null(input$indVars) || !is.null(input$depVars)) {
+                    summary(runLinearRegression())$coefficients
+            } else {
+                    print(data.frame(Warning="Please select model parameters."))
+            }
+    })
+    runLogisticRegression <- eventReactive(input$runLogisticButton, {
+            
+            ## convert variables to factor after button click
+            datas <- dataInput()
+            lm_multi <- glm(print(as.formula(
+                    paste(input$depVars," ~ ", 
+                          paste(input$indVars, collapse="+")))), 
+                    data=datas, 
+                    family=binomial(link='logit'))
+            step(lm_multi, direction="both")
+            
+    })
+    output$logisticRegressionTab <- renderTable({
+            
+            if(!is.null(input$indVars) || !is.null(input$depVars)) {
+                    summary(runLogisticRegression())$coefficients
+            } else {
+                    print(data.frame(Warning="Please select model parameters."))
+            }
     })
 })

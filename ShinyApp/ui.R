@@ -27,12 +27,14 @@ shinyUI(fluidPage(
                 uiOutput("choose_depVars"),
                 uiOutput("choose_indVars"),
                 uiOutput("choose_factorVars"),
-                actionButton("runButton", "Run Regression")
+                actionButton("runLinearButton", "Run Linear Regression"),
+                actionButton("runLogisticButton", "Run Logistic Regression")
         ),
         mainPanel(
             tabsetPanel(
                 tabPanel("Data Table", tableOutput('contents')),
-                tabPanel("Regression Results"),
+                tabPanel("Step-wise Linear Regression Results", tableOutput("linearRegressionTab")),
+                tabPanel("Logistic Regression Results", tableOutput("logisticRegressionTab")),
                 tabPanel("Plot")
             )
         )
