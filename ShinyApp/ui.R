@@ -34,14 +34,19 @@ shinyUI(fluidPage(
         ),
         mainPanel(
             tabsetPanel(
-                tabPanel("Data Table", 
+                tabPanel("Data Table",
+                         br(),
                          tableOutput('contents')),
-                tabPanel("Step-wise Linear Regression Results", 
+                tabPanel("Step-wise Linear Regression Results",
+                         br(),
                          tableOutput("linearRegressionTab")),
-                tabPanel("Logistic Regression Results", 
+                tabPanel("Logistic Regression Results",
+                         br(),
                          tableOutput("logisticRegressionTab")),
                 tabPanel("Plot",
+                         h3("Linear Regression Plot"),
                          plotOutput("linearPlot"),
+                         h3("Logistic Regression Plot"),
                          plotOutput("logisticPlot"))
             )
         )
