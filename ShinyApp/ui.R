@@ -1,7 +1,7 @@
 library(shiny)
 
 shinyUI(fluidPage(
-        titlePanel("Upload File for Analysis"),
+        titlePanel("Upload File for Regression Analysis"),
         sidebarPanel(
                 fileInput('file', 'Choose file to upload',
                           accept = c(
@@ -34,10 +34,15 @@ shinyUI(fluidPage(
         ),
         mainPanel(
             tabsetPanel(
-                tabPanel("Data Table", tableOutput('contents')),
-                tabPanel("Step-wise Linear Regression Results", tableOutput("linearRegressionTab")),
-                tabPanel("Logistic Regression Results", tableOutput("logisticRegressionTab")),
-                tabPanel("Plot")
+                tabPanel("Data Table", 
+                         tableOutput('contents')),
+                tabPanel("Step-wise Linear Regression Results", 
+                         tableOutput("linearRegressionTab")),
+                tabPanel("Logistic Regression Results", 
+                         tableOutput("logisticRegressionTab")),
+                tabPanel("Plot",
+                         plotOutput("linearPlot"),
+                         plotOutput("logisticPlot"))
             )
         )
 ))

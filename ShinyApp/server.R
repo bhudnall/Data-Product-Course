@@ -100,4 +100,16 @@ shinyServer(function(input, output) {
                     print(data.frame(Warning="Please select model parameters."))
             }
     })
+    output$linearPlot <- renderPlot({
+            
+            model <- runLinearRegression()
+            par(mfrow = c(2, 2))
+            plot(model)
+    })
+    output$logisticPlot <- renderPlot({
+        
+            model <- runLogisticRegression()
+            par(mfrow = c(2, 2))
+            plot(model)
+    })
 })
