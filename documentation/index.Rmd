@@ -1,6 +1,6 @@
 ---
 title       : Flexible Regression
-subtitle    : 
+subtitle    : How to use Flexible Regression App
 author      : Brian Hudnall
 job         : Analyst
 framework   : shower        # {io2012, html5slides, shower, dzslides, ...}
@@ -20,6 +20,12 @@ knit        : slidify::knit2slides
 --- .class #id 
 
 ## Slide 2
+
+--- .class #id
+
+## Slide 3
+
+
 
 
 
