@@ -13,7 +13,7 @@ knit        : slidify::knit2slides
 
 ## Idea
 
-This ShinyApp was created for the Developing Data Products class offered through John Hopkins. The premise behind the app
+This [ShinyApp](https://bhudnall.shinyapps.io/RegressionShinyApp) was created for the Developing Data Products class offered through John Hopkins. The premise behind the app
 is to give analysts the ability to run a regression model on a data set they upload. Analysts who use the app do not need to understand the code, but must have an understanding of regression models and how to interpret the results.
 
 --- .class #id 
@@ -40,9 +40,10 @@ is to give analysts the ability to run a regression model on a data set they upl
 
 ## Results
 
-1. The results will show a table. The key columns to pay attention to are the Estimate and Pr columns. 
-2. Estimate is the coefficient for the corresponding predictor variable and Pr will inform you if the results are statistically significant.
-3. There will be plots of the data model located on the plot tab. It's important here to look for systematic trends that reflect poorly on the model.
+1. It's important to note that if you selected a linear regression model, that this is a step-wise model. Meaning certain independent variables will be excluded to optimize the results.
+2. The results will show a table. The key columns to pay attention to are the Estimate and Pr columns. 
+3. Estimate is the coefficient for the corresponding predictor variable and Pr will inform you if the results are statistically significant.
+4. There will be plots of the data model located on the plot tab. It's important here to look for systematic trends that reflect poorly on the model.
 
 --- .class #id
 
