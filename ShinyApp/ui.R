@@ -41,7 +41,7 @@ shinyUI(fluidPage(
                 tabPanel("Data Table", icon = icon("table"),
                          br(),
                          dataTableOutput('contents')),
-                tabPanel("SW Linear Regression", icon = icon("calculator"),
+                tabPanel("Linear Regression", icon = icon("calculator"),
                          br(),
                          conditionalPanel("output.fileUploaded", actionButton("runLinearButton", "Run Linear Regression")),
                          br(),

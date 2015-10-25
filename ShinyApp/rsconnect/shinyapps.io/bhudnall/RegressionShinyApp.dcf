@@ -1,8 +1,8 @@
 name: RegressionShinyApp
 account: bhudnall
 server: shinyapps.io
-bundleId: 296758
+bundleId: 296781
 url: https://bhudnall.shinyapps.io/RegressionShinyApp
-when: 1445737817.11036
+when: 1445740324.76989
 asMultiple: FALSE
 asStatic: FALSE
