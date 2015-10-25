@@ -1,73 +1,171 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
+<!DOCTYPE html>
+<html>
 <head>
-	<title>Regression App</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=1274, user-scalable=no">
-	<meta name="description" content="Regression App">
-	<meta name="author" content="Brian Hudnall">
-	<meta name="generator" content="slidify" />
-	<!-- LOAD STYLE SHEETS -->
-	<link rel="stylesheet" href="libraries/frameworks/shower/themes/ribbon/styles/screen.css">
-	<link rel="stylesheet" media="print"
-	  href="libraries/frameworks/shower/themes/ribbon/styles/print.css">
-	<link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css">  <link rel="stylesheet" href = "assets/css/ribbons.css">
+  <title>Regression App</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Regression App">
+  <meta name="author" content="Brian Hudnall">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
 
-	<!--
-		To apply styles to the certain slides
-		use slide ID to get needed elements
-		-->
-	<style>
-		#Cover h2 {
-      margin:65px 0 0;
-			color:#FFF;
-			text-align:center;
-			font-size:70px;
-			}
-		#FitToWidth h2,
-		#FitToHeight h2 {
-			color:#FFF;
-			text-align:center;
-			}
-	</style> 
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
 </head>
-<body class="list">
-  <header class="caption">
-  	<h1>Regression App</h1>
-	</header>
-  <section class="slide " id="slide-1">
-  <div>
-    <h2>Slide 1</h2>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Regression App</h1>
+    <h2>Documentation</h2>
+    <p>Brian Hudnall<br/>Analyst</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Idea</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This ShinyApp was created for the Developing Data Products class offered through John Hopkins. The premise behind the app
+is to give analysts the ability to run a regression model on a data set they upload. Analysts who use the app do not need to understand the code, but must have an understanding of regression models and how to interpret the results.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Dependencies</h2>
+  </hgroup>
+  <article data-timings="">
     <ol>
-<li>Edit YAML front matter</li>
-<li>Write using R Markdown</li>
-<li>Use an empty line followed by three dashes to separate slides!</li>
+<li>You need to have a data set that structures the data in a <a href="https://en.wikipedia.org/wiki/Wide_and_narrow_data">wide format</a>.</li>
+<li>The data must contain independent and dependent variables.</li>
+<li>The variables can be either dummy variables, or actuals. If both independent and dependent are dummy, then you should use the Logistic Regression as the output can then account for <a href="https://en.wikipedia.org/wiki/Heteroscedasticity">Heteroscedasticity</a>.</li>
 </ol>
 
-  </div>
-</section>
-<section class="slide class" id="id">
-  <div>
-    <h2>Slide 2</h2>
-    
-  </div>
-</section>
-<section class="slide class" id="id">
-  <div>
-    <h2>Slide 3</h2>
-    
-  </div>
-</section>
-  <div class="progress">
-    <div></div>
-  </div>
-	<script src="libraries/frameworks/shower/shower.js"></script>
-	<!-- LOAD HIGHLIGHTER JS FILES -->
-	<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<!-- DONE LOADING HIGHLIGHTER JS FILES -->
-	 
-		<!-- Copyright © 2010–2012 Vadim Makeev — pepelsbey.net -->
-	<!-- Photos by John Carey — fiftyfootshadows.net -->
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Upload and Configure</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>First upload the data set by selecting Choose File. Be sure to select the right file type.</li>
+<li>Select one dependent/response variable. For example, if I were to use the <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html">mtcars data</a> I might use mpg as the variable here.</li>
+<li>Select independent variables. Using the same example, I might select carb, cyl, gear, vs, wt here. I would then be able to understand the relationship between these predictor variables and the response variable (mpg). 
+
+<ul>
+<li>The response variable will automatically be excluded as an option.</li>
+</ul></li>
+<li>Of the independent variables selected, indicate if they are factor/categorical variables with the drop down menu. If this is not done, results will be uninterpretable.
+
+<ul>
+<li>Only independent variables will be included within this set.</li>
+</ul></li>
+<li>After data set is finalized, click either the linear or logistic regression tab and click the run button.</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Results</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>The results will show a table. The key columns to pay attention to are the Estimate and Pr columns. </li>
+<li>Estimate is the coefficient for the corresponding predictor variable and Pr will inform you if the results are statistically significant.</li>
+<li>There will be plots of the data model located on the plot tab. It&#39;s important here to look for systematic trends that reflect poorly on the model.</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Next steps</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>I really enjoyed working on this project and hope you enjoyed reading the documentation. My next step with this project is to allow the user functionality to transform the data set they upload. Specifically, I would like to give users the ability to dcast variables in there data set and change the form from long to wide. This would allow more flexibility and is a common transformation with web data. Thank you!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Idea'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Dependencies'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Upload and Configure'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Results'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Next steps'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
 </body>
-</html>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

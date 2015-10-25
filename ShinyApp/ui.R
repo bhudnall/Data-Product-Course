@@ -2,7 +2,7 @@ library(shiny)
 library(DT)
 
 shinyUI(fluidPage(
-        titlePanel("Regression Analysis"),
+        navbarPage("Regression Analysis"),
         sidebarPanel(
                 tags$head(
                     tags$style(type="text/css", ".well { max-width: 200px; }")
@@ -33,23 +33,25 @@ shinyUI(fluidPage(
                 conditionalPanel("output.fileUploaded", 
                     uiOutput("choose_depVars"),
                     uiOutput("choose_indVars"),
-                    uiOutput("choose_factorVars"),
-                    actionButton("runLinearButton", "Run Linear Regression"),
-                    actionButton("runLogisticButton", "Run Logistic Regression")
+                    uiOutput("choose_factorVars")
             )
         ),
         mainPanel(
             tabsetPanel(
-                tabPanel("Data Table",
+                tabPanel("Data Table", icon = icon("table"),
                          br(),
                          dataTableOutput('contents')),
-                tabPanel("Step-wise Linear Regression Results",
+                tabPanel("SW Linear Regression", icon = icon("calculator"),
+                         br(),
+                         conditionalPanel("output.fileUploaded", actionButton("runLinearButton", "Run Linear Regression")),
                          br(),
                          dataTableOutput("linearRegressionTab")),
-                tabPanel("Logistic Regression Results",
+                tabPanel("Logistic Regression", icon = icon("calculator"),
+                         br(),
+                         conditionalPanel("output.fileUploaded", actionButton("runLogisticButton", "Run Logistic Regression")),
                          br(),
                          dataTableOutput("logisticRegressionTab")),
-                tabPanel("Plot",
+                tabPanel("Plot", icon = icon("area-chart"),
                          h3("Linear Regression Plot"),
                          plotOutput("linearPlot"),
                          h3("Logistic Regression Plot"),
