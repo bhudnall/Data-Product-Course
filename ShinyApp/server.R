@@ -1,6 +1,3 @@
-# Things that need to be done:
-#     - develop formula
-
 
 library(shiny)
 library(leaps)

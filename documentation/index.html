@@ -95,15 +95,27 @@ is to give analysts the ability to run a regression model on a data set they upl
 
 <slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Results</h2>
+    <h2>Interpreting Models</h2>
   </hgroup>
   <article data-timings="">
-    <ol>
-<li>It&#39;s important to note that if you selected a linear regression model, that this is a step-wise model. Meaning certain independent variables will be excluded to optimize the results.</li>
-<li>The results will show a table. The key columns to pay attention to are the Estimate and Pr columns. </li>
-<li>Estimate is the coefficient for the corresponding predictor variable and Pr will inform you if the results are statistically significant.</li>
-<li>There will be plots of the data model located on the plot tab. It&#39;s important here to look for systematic trends that reflect poorly on the model.</li>
-</ol>
+    <ul>
+<li>It&#39;s important to note that both the linear and logistic models are step-wise. Meaning certain independent variables will be excluded to optimize the results. Below is the code used to create the linear model:</li>
+</ul>
+
+<pre><code class="r">lm_multi &lt;- lm(print(as.formula(paste(input$depVars,&quot; ~ &quot;, 
+    paste(input$indVars, collapse=&quot;+&quot;)))), data=datas)
+step(lm_multi, direction=&quot;both&quot;)
+</code></pre>
+
+<ul>
+<li>It&#39;s also important to know that you cannot run the binary logistic regression model if the dependent variable values are not 1 and 0, due to the nature of the model. Below is the code for the logistic model:</li>
+</ul>
+
+<pre><code class="r">lm_multi &lt;- glm(print(as.formula(paste(input$depVars,&quot; ~ &quot;,  
+    paste(input$indVars, collapse=&quot;+&quot;)))), data=datas, 
+    family=binomial(link=&#39;logit&#39;)) 
+step(lm_multi, direction=&quot;both&quot;)
+</code></pre>
 
   </article>
   <!-- Presenter Notes -->
@@ -111,10 +123,14 @@ is to give analysts the ability to run a regression model on a data set they upl
 
 <slide class="class" id="id" style="background:;">
   <hgroup>
-    <h2>Next steps</h2>
+    <h2>Results</h2>
   </hgroup>
   <article data-timings="">
-    <p>I really enjoyed working on this project and hope you enjoyed reading the documentation. My next step with this project is to allow the user functionality to transform the data set they upload. Specifically, I would like to give users the ability to dcast variables in there data set and change the form from long to wide. This would allow more flexibility and is a common transformation with web data. Thank you!</p>
+    <ol>
+<li>The results will show a table. The key columns to pay attention to are the Estimate and Pr columns. </li>
+<li>Estimate is the coefficient for the corresponding predictor variable and Pr will inform you if the results are statistically significant.</li>
+<li>There will be plots of the data model located on the plot tab. It&#39;s important here to look for systematic trends that reflect poorly on the model.</li>
+</ol>
 
   </article>
   <!-- Presenter Notes -->
@@ -144,13 +160,13 @@ is to give analysts the ability to run a regression model on a data set they upl
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Results'>
+        data-slide=4 title='Interpreting Models'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='Next steps'>
+        data-slide=5 title='Results'>
          5
       </a>
     </li>

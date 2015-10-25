@@ -38,18 +38,33 @@ is to give analysts the ability to run a regression model on a data set they upl
 
 --- .class #id
 
-## Results
+## Interpreting Models
 
-1. It's important to note that if you selected a linear regression model, that this is a step-wise model. Meaning certain independent variables will be excluded to optimize the results.
-2. The results will show a table. The key columns to pay attention to are the Estimate and Pr columns. 
-3. Estimate is the coefficient for the corresponding predictor variable and Pr will inform you if the results are statistically significant.
-4. There will be plots of the data model located on the plot tab. It's important here to look for systematic trends that reflect poorly on the model.
+- It's important to note that both the linear and logistic models are step-wise. Meaning certain independent variables will be excluded to optimize the results. Below is the code used to create the linear model:
+```{r eval=FALSE}
+lm_multi <- lm(print(as.formula(paste(input$depVars," ~ ", 
+    paste(input$indVars, collapse="+")))), data=datas)
+step(lm_multi, direction="both")
+```
+- It's also important to know that you cannot run the binary logistic regression model if the dependent variable values are not 1 and 0, due to the nature of the model. Below is the code for the logistic model:
+```{r eval=FALSE, size='tiny'}
+lm_multi <- glm(print(as.formula(paste(input$depVars," ~ ",  
+    paste(input$indVars, collapse="+")))), data=datas, 
+    family=binomial(link='logit')) 
+step(lm_multi, direction="both")
+```
 
 --- .class #id
 
-## Next steps
+## Results
 
-I really enjoyed working on this project and hope you enjoyed reading the documentation. My next step with this project is to allow the user functionality to transform the data set they upload. Specifically, I would like to give users the ability to dcast variables in there data set and change the form from long to wide. This would allow more flexibility and is a common transformation with web data. Thank you!
+1. The results will show a table. The key columns to pay attention to are the Estimate and Pr columns. 
+2. Estimate is the coefficient for the corresponding predictor variable and Pr will inform you if the results are statistically significant.
+3. There will be plots of the data model located on the plot tab. It's important here to look for systematic trends that reflect poorly on the model.
+
+
+
+
 
 
 
