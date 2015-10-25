@@ -4,6 +4,7 @@
 
 library(shiny)
 library(leaps)
+library(DT)
 
 options(shiny.maxRequestSize = 9*1024^2)
 
@@ -17,9 +18,13 @@ shinyServer(function(input, output) {
             assign('regress_data', data2, envir = .GlobalEnv)
         
     })
+    output$fileUploaded <- reactive({
+        return(!is.null(dataInput()))
+    })
+    outputOptions(output, 'fileUploaded', suspendWhenHidden=FALSE)
     getFields <- reactive({
             if(is.null(input$file)) return() 
-            fields <- names(dataInput())
+            fields <- sort(names(dataInput()))
     })
     output$choose_indVars <- renderUI({
             
@@ -30,24 +35,25 @@ shinyServer(function(input, output) {
     output$choose_depVars <- renderUI({
         
             depFields <- getFields()
-            checkboxGroupInput("depVars", "Choose One Dependent Variable",
-                                choices = depFields, inline = TRUE)
+            selectInput("depVars", "Choose One Dependent Variable",
+                                choices = depFields)
     })
     output$choose_factorVars <- renderUI({
             
-            checkboxGroupInput("factorVars", "Which Independent variables are factor variables?",
-                               choices = input$indVars, inline = TRUE)
+            if(is.null(input$indVars)) return()
+            selectInput("factorVars", "Which Independent variables are factor variables?",
+                               choices = input$indVars, multiple = TRUE)
     })
-    output$contents <- renderTable({
+    output$contents <- renderDataTable({
             
             if(is.null(input$file)) return()
             df <- dataInput()
-            print(head(df))
+            print(df)
             if(is.null(input$indVars) || !(input$indVars) %in% names(df)) return()
             if(is.null(input$depVars) || !(input$depVars) %in% names(df)) return()
             final_cols <- c(input$indVars, input$depVars)
             df <- df[,final_cols, drop = FALSE]
-            print(head(df))
+            print(df)
             
     })
     getDataForRegression <- reactive({
@@ -73,7 +79,7 @@ shinyServer(function(input, output) {
             step(lm_multi, direction="both")
             
     })
-    output$linearRegressionTab <- renderTable({
+    output$linearRegressionTab <- renderDataTable({
             
             if(!is.null(input$indVars) || !is.null(input$depVars)) {
                     summary(runLinearRegression())$coefficients
@@ -92,7 +98,7 @@ shinyServer(function(input, output) {
             step(lm_multi, direction="both")
             
     })
-    output$logisticRegressionTab <- renderTable({
+    output$logisticRegressionTab <- renderDataTable({
             
             if(!is.null(input$indVars) || !is.null(input$depVars)) {
                     summary(runLogisticRegression())$coefficients

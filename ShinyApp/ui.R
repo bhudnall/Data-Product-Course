@@ -1,8 +1,12 @@
 library(shiny)
+library(DT)
 
 shinyUI(fluidPage(
-        titlePanel("Upload File for Regression Analysis"),
+        titlePanel("Regression Analysis"),
         sidebarPanel(
+                tags$head(
+                    tags$style(type="text/css", ".well { max-width: 200px; }")
+                ),
                 fileInput('file', 'Choose file to upload',
                           accept = c(
                                   'text/csv',
@@ -26,23 +30,25 @@ shinyUI(fluidPage(
                                'Single Quote'="'"),
                              'Double Quote'),
                 
-                uiOutput("choose_depVars"),
-                uiOutput("choose_indVars"),
-                uiOutput("choose_factorVars"),
-                actionButton("runLinearButton", "Run Linear Regression"),
-                actionButton("runLogisticButton", "Run Logistic Regression")
+                conditionalPanel("output.fileUploaded", 
+                    uiOutput("choose_depVars"),
+                    uiOutput("choose_indVars"),
+                    uiOutput("choose_factorVars"),
+                    actionButton("runLinearButton", "Run Linear Regression"),
+                    actionButton("runLogisticButton", "Run Logistic Regression")
+            )
         ),
         mainPanel(
             tabsetPanel(
                 tabPanel("Data Table",
                          br(),
-                         tableOutput('contents')),
+                         dataTableOutput('contents')),
                 tabPanel("Step-wise Linear Regression Results",
                          br(),
-                         tableOutput("linearRegressionTab")),
+                         dataTableOutput("linearRegressionTab")),
                 tabPanel("Logistic Regression Results",
                          br(),
-                         tableOutput("logisticRegressionTab")),
+                         dataTableOutput("logisticRegressionTab")),
                 tabPanel("Plot",
                          h3("Linear Regression Plot"),
                          plotOutput("linearPlot"),

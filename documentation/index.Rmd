@@ -1,5 +1,5 @@
 ---
-title       : Flexible Regression
+title       : Regression App
 subtitle    : How to use Flexible Regression App
 author      : Brian Hudnall
 job         : Analyst
@@ -11,7 +11,7 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-## Read-And-Delete
+## Slide 1
 
 1. Edit YAML front matter
 2. Write using R Markdown
